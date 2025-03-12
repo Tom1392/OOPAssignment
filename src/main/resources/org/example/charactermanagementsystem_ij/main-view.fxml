@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.charactermanagementsystem_ij.CharacterManagementSystemController">
+   <children>
+      <ImageView fitHeight="340.0" fitWidth="603.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Pixel_Arena.png" />
+         </image></ImageView>
+      <MenuBar layoutY="314.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Main Menu">
+               <items>
+                  <MenuItem fx:id="backToMenuButton" mnemonicParsing="false" onAction="#BackToMainMenu" text="Main Menu" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+      <Label alignment="CENTER" layoutY="116.0" prefHeight="141.0" prefWidth="600.0" text="Hero Quest Arena" textFill="#ffdf11" AnchorPane.bottomAnchor="468.0">
+         <font>
+            <Font name="Century Gothic" size="65.0" />
+         </font>
+      </Label>
+      <SplitPane dividerPositions="0.5033444816053512" layoutX="214.0" layoutY="605.0" prefHeight="386.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.6256544502617801" layoutX="6.0" layoutY="177.0" orientation="VERTICAL" prefHeight="384.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <VBox prefHeight="350.0" prefWidth="296.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Pane prefHeight="58.5" prefWidth="296.0">
+                                       <children>
+                                          <Label layoutX="84.0" layoutY="20.0" text="Hero Name">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Text layoutX="205.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="nameTxt" editable="false" layoutX="194.0" layoutY="17.0" prefHeight="25.0" prefWidth="88.0" />
+                                          <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@name_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="58.5" prefWidth="296.0">
+                                       <children>
+                                          <Label layoutX="84.0" layoutY="20.0" text="Class">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="classTxt" editable="false" layoutX="194.0" layoutY="17.0" prefHeight="25.0" prefWidth="88.0" />
+                                          <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@archer_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="58.5" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="83.0" layoutY="19.0" text="HP ">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="hPTxt" layoutX="194.0" layoutY="17.0" prefHeight="25.0" prefWidth="88.0" />
+                                          <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@HP_Icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="58.5" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="82.0" layoutY="20.0" text="Defence Level">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="defTxt" layoutX="194.0" layoutY="17.0" prefHeight="25.0" prefWidth="88.0" />
+                                          <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="7.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Defence_level_Icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                    <Pane prefHeight="58.5" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="80.0" layoutY="20.0" text="Attack Power">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="attTxt" layoutX="194.0" layoutY="17.0" prefHeight="25.0" prefWidth="88.0" />
+                                          <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Attack_power_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="296.0">
+                           <children>
+                              <Button fx:id="levelUpButton" layoutY="58.0" mnemonicParsing="false" onAction="#levelUp" prefHeight="70.0" prefWidth="296.0" text="Level Up" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
+                                 <font>
+                                    <Font name="MS Gothic" size="33.0" />
+                                 </font>
+                              </Button>
+                              <Pane layoutX="-1.0" layoutY="58.0" prefHeight="57.0" prefWidth="298.0" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="77.0" layoutY="19.0" text="Experience Points">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="eXTxt" editable="false" layoutX="196.0" layoutY="16.0" prefWidth="88.0" />
+                                    <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@ex_points.png" />
+                                       </image></ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.7879581151832461" layoutX="7.0" layoutY="184.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ImageView fx:id="heroImageView" fitHeight="309.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Screenshot2025-03-04195212.png" />
+                                 </image></ImageView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Button fx:id="battleButton" layoutX="5.0" layoutY="106.0" mnemonicParsing="false" onAction="#getReadyForBattle" prefHeight="82.0" prefWidth="292.0" text="Battle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="MS Gothic" size="33.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.charactermanagementsystem_ij.CreateHeroController">
+   <children>
+      <MenuBar layoutX="34.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Main Menu">
+            <items>
+              <MenuItem fx:id="backToMenuButton" mnemonicParsing="false" onAction="#backToMenu" text="Main Menu" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.5" layoutY="25.0" prefHeight="523.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="296.0">
+               <children>
+                  <VBox prefHeight="472.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane prefHeight="78.0" prefWidth="294.0">
+                           <children>
+                              <MenuButton layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Hero Class">
+                                <items>
+                                  <MenuItem fx:id="ArcherButton" mnemonicParsing="false" onAction="#setClassTxtArcher" text="Archer" />
+                                  <MenuItem fx:id="WarriorButton" mnemonicParsing="false" onAction="#setClassTxtWarrior" text="Warrior" />
+                                    <MenuItem fx:id="MageButton" mnemonicParsing="false" onAction="#setClassTxtMage" text="Mage" />
+                                </items>
+                              </MenuButton>
+                              <TextField fx:id="heroClassTxt" disable="true" editable="false" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="78.0" prefWidth="294.0">
+                           <children>
+                              <TextField fx:id="heroNameTxt" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                              <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="107.0" text="Hero Name" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="88.0" prefHeight="78.0" prefWidth="294.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="107.0" text="HP" />
+                              <TextField fx:id="hPTxt" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="166.0" prefHeight="78.0" prefWidth="294.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="107.0" text="Attack Power" />
+                              <TextField fx:id="attackPowerTxt" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="10.0" layoutY="244.0" prefHeight="78.0" prefWidth="294.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="107.0" text="Defence Level" />
+                              <TextField fx:id="defenceLevelTxt" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                           </children>
+                        </Pane>
+                        <Button fx:id="createHeroButton" mnemonicParsing="false" onAction="#createHero" prefHeight="78.0" prefWidth="294.0" text="Create Hero" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@backgroundStyle.css">
+               <children>
+                  <ImageView fx:id="classImage" fitHeight="299.0" fitWidth="304.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0" />
+                  <Pane layoutX="1.0" layoutY="301.0" prefHeight="78.0" prefWidth="294.0" AnchorPane.bottomAnchor="142.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="24.0" prefHeight="31.0" prefWidth="107.0" text="Creation Points" />
+                        <TextField fx:id="creationPtsTxt" disable="true" editable="false" layoutX="163.0" layoutY="27.0" prefHeight="25.0" prefWidth="119.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
