@@ -1,6 +1,6 @@
 package org.example.charactermanagementsystem_ij;
 
-public class Hero
+public abstract class Hero
 {
     //hero attributes
 protected String heroName;
@@ -10,6 +10,8 @@ protected int defenceLevel;
 protected int attackPower;
 protected int experiencePoints;
 
+protected abstract String attackDescription();
+protected abstract String defenceDescription();
 
 
 public Hero(String heroName, String heroClass, int healthPoints, int defenceLevel, int attackPower)
@@ -70,8 +72,4 @@ public Hero(String heroName, String heroClass, int healthPoints, int defenceLeve
         this.experiencePoints = experiencePoints;
     }
 
-    public String getWeapon(String weapon)
-    {
-        return weapon;
-    }
 }

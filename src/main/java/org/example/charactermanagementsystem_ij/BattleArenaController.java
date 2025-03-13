@@ -10,18 +10,13 @@ import java.io.IOException;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import java.io.IOException;
-import java.net.URL;
 
 
 public class BattleArenaController
 {
-    private String opponentWeapon;
-    private String playerWeapon;
     private boolean battleOver=false;
    private Hero battlePlayer;
    private Hero battleOpponent;
@@ -33,8 +28,25 @@ public class BattleArenaController
     Image warriorIcon = new Image(getClass().getResourceAsStream("/org/example/charactermanagementsystem_ij/WarriorIcon.png"));
     Image mageIcon = new Image(getClass().getResourceAsStream("/org/example/charactermanagementsystem_ij/WizardIcon.png"));
 
+
+    public void setPlayersInfo(Hero hero, Hero opponent)
+    {
+        heroNameTxt.setText(hero.getHeroName());
+        opponentNameTxt.setText(opponent.getHeroName());
+        heroHpTxt.setText(String.valueOf(hero.getHealthPoints()));
+        opponentHpTxt.setText(String.valueOf(opponent.getHealthPoints()));
+        setPlayerImageView(hero,opponent);
+        battlePlayer=hero;
+        battleOpponent=opponent;
+        battlePlayerDefLev=hero.getDefenceLevel();
+        battleOppDefLev=opponent.getDefenceLevel();
+        battlePlayerAttLev=hero.getAttackPower();
+        battleOppAttLev=opponent.getAttackPower();
+    }
+
+
     @FXML
-    private Button attackButton;
+    private Button fightButton;
 
     @FXML
     private TextArea battleInfoTxtAr;
@@ -75,7 +87,7 @@ public class BattleArenaController
     @FXML
     private void backMainView(Hero hero, ActionEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(CharacterManagementSystemApplication.class.getResource("/org/example/charactermanagementsystem_ij/main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(GameManager.class.getResource("/org/example/charactermanagementsystem_ij/main-view.fxml"));
         Parent root = loader.load();
         CharacterManagementSystemController controller =loader.getController();
         controller.setHeroInfo(hero);
@@ -87,67 +99,37 @@ public class BattleArenaController
         currentStage.close();
     }
     @FXML
-    public void attack(ActionEvent event) throws IOException {
-        if (!battleOver) {
+    public void fight(ActionEvent event) throws IOException {
+        if (battleOver) {
+            return;
+        } else {
             int battlePlayerHp = Integer.parseInt(heroHpTxt.getText());
             int battleOpponentHp = Integer.parseInt(opponentHpTxt.getText());
-            int playersAttack = (int) (Math.random() * battlePlayerAttLev);
-                int opponentsDefence = (int) (Math.random() * battleOppDefLev);
-                if (opponentsDefence > playersAttack)
-                {
-                    battleInfoTxtAr.appendText(battleOpponent.getHeroName()+" blocked the attack\n");
-                } else {
-                    battleOpponentHp = battleOpponentHp - playersAttack;
-                    battleOpponentHp = Math.max(0, battleOpponentHp);
-                    opponentHpTxt.setText(String.valueOf(battleOpponentHp));
-                    battleInfoTxtAr.appendText(battlePlayer.getHeroName()+" Strikes A Blow with "+playerWeapon+"\n");
-                    opponentHpBar.setProgress((double) battleOpponentHp / battleOpponent.getHealthPoints());
-                    if (battleOpponentHp == 0)
-                    {
-                        playerWon();
-                        return;
-                    }
-                }
-                int opponentsAttack= (int)(Math.random()*battleOppAttLev);
-                int playersDefence= (int)(Math.random()*battlePlayerDefLev);
-                if(playersDefence>opponentsAttack)
-                {
-                    battleInfoTxtAr.appendText(battlePlayer.getHeroName()+" blocked the attack\n");
-                }
-                else
-                {
-                    battlePlayerHp=battlePlayerHp-opponentsAttack;
-                    battlePlayerHp = Math.max(0, battlePlayerHp);
-                    heroHpTxt.setText(String.valueOf(battlePlayerHp));
-                    battleInfoTxtAr.appendText(battleOpponent.getHeroName()+" Stikes A blow with "+opponentWeapon+"\n");
-                    heroHpBar.setProgress((double) battlePlayerHp/ battlePlayer.getHealthPoints());
-                    if (battlePlayerHp == 0)
-                    {
-                        opponentWon();
-                        return;
-                    }
-                }
-                }
+
+            GameManager game = GameManager.getInstance();
+            GameManager.BattleResult result = game.performFightRound(battlePlayer, battlePlayerHp, battlePlayerAttLev, battlePlayerDefLev,
+                    battleOpponent, battleOpponentHp, battleOppAttLev, battleOppDefLev);
+            heroHpTxt.setText(String.valueOf(result.playerHp));
+            opponentHpTxt.setText(String.valueOf(result.opponentHp));
+            heroHpBar.setProgress((double) result.playerHp / battlePlayer.getHealthPoints());
+            opponentHpBar.setProgress((double) result.opponentHp / battleOpponent.getHealthPoints());
+            battleInfoTxtAr.appendText(result.battleInfo);
+            if (result.opponentWon) {
+                playerWon();
+                return;
+            } else if (result.playerWon) {
+                opponentWon();
+                return;
             }
 
+            System.out.println(result.playerHp);
+            System.out.println(result.opponentHp);
 
 
-    public void setPlayersInfo(Hero hero, Hero opponent)
-    {
-        heroNameTxt.setText(hero.getHeroName());
-        opponentNameTxt.setText(opponent.getHeroName());
-        heroHpTxt.setText(String.valueOf(hero.getHealthPoints()));
-        opponentHpTxt.setText(String.valueOf(opponent.getHealthPoints()));
-        setPlayerImageView(hero,opponent);
-        battlePlayer=hero;
-        battleOpponent=opponent;
-        battlePlayerDefLev=hero.getDefenceLevel();
-        battleOppDefLev=opponent.getDefenceLevel();
-        battlePlayerAttLev=hero.getAttackPower();
-        battleOppAttLev=opponent.getAttackPower();
-        playerWeapon=setWeapon(hero);
-        opponentWeapon=setWeapon(opponent);
+             // Append directly to text field
+        }
     }
+
 
     public void setPlayerImageView(Hero player, Hero opponent)
     {
@@ -205,21 +187,6 @@ public void opponentWon()
         battlePlayer.setExperiencePoints(currentXP);
     }
 
-    public String setWeapon(Hero hero)
-    {
-        if (hero instanceof Archer)
-        {
-            return ((Archer) hero).getWeapon();
-        }
-        else if (hero instanceof Warrior)
-        {
-            return ((Warrior) hero).getWeapon();
-        }
-        else if (hero instanceof Mage)
-        {
-            return ((Mage) hero).getWeapon();
-        }
-        return "Error";
-    }
+
 
 }

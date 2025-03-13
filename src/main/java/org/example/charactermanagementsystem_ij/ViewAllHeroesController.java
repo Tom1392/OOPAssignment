@@ -1,6 +1,5 @@
 package org.example.charactermanagementsystem_ij;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -68,8 +67,9 @@ public class ViewAllHeroesController implements Initializable
     defCol.setCellValueFactory(new PropertyValueFactory<>("defenceLevel"));
     attackCol.setCellValueFactory(new PropertyValueFactory<>("attackPower"));
     xPCol.setCellValueFactory(new PropertyValueFactory<>("experiencePoints"));
-
-    allHeroesTable.setItems(CharacterManagementSystemApplication.heroes);
+     GameManager game = GameManager.getInstance();
+     ObservableList<Hero> heroes = game.getHeroes();
+    allHeroesTable.setItems(heroes);
  }
 
     @FXML
@@ -81,7 +81,7 @@ public class ViewAllHeroesController implements Initializable
     @FXML
     private void heroMainView(Hero hero, MouseEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(CharacterManagementSystemApplication.class.getResource("/org/example/charactermanagementsystem_ij/main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(GameManager.class.getResource("/org/example/charactermanagementsystem_ij/main-view.fxml"));
         Parent root = loader.load();
         CharacterManagementSystemController controller =loader.getController();
         controller.setHeroInfo(hero);

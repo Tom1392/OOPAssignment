@@ -2,6 +2,7 @@ package org.example.charactermanagementsystem_ij;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,12 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import javafx.scene.Scene;
 
 public class CreateHeroController implements Initializable
 {
@@ -135,8 +133,10 @@ public class CreateHeroController implements Initializable
 
     @FXML
     private void createHero(ActionEvent event) {
-        String heroName = String.valueOf(heroNameTxt.getText());
-        for(Hero hero : CharacterManagementSystemApplication.heroes)
+        GameManager game = GameManager.getInstance();
+        ObservableList<Hero> heroes = game.getHeroes();
+        String heroName = heroNameTxt.getText();
+        for(Hero hero : heroes)
         {
             if(Objects.equals(heroName, hero.getHeroName()))
             {
@@ -144,7 +144,7 @@ public class CreateHeroController implements Initializable
                 return;
             }
         }
-        String heroClass = String.valueOf(heroClassTxt.getText());
+        String heroClass = heroClassTxt.getText();
         int healthPoints = Integer.parseInt(hPTxt.getText());
         int defenceLevel = Integer.parseInt(defenceLevelTxt.getText());
         int attackPower = Integer.parseInt(attackPowerTxt.getText());
@@ -160,18 +160,19 @@ public class CreateHeroController implements Initializable
         }
         else
         {
+            Hero newHero;
             switch (heroClass) {
                 case "Archer":
                     Archer archer = new Archer(heroName, heroClass, healthPoints, defenceLevel, attackPower);
-                    CharacterManagementSystemApplication.heroes.add(archer);
+                    game.addHero(archer);
                     break;
                 case "Warrior":
                     Warrior warrior = new Warrior(heroName, heroClass, healthPoints, defenceLevel, attackPower);
-                    CharacterManagementSystemApplication.heroes.add(warrior);
+                    game.addHero(warrior);
                     break;
                 case "Mage":
                     Mage mage = new Mage(heroName, heroClass, healthPoints, defenceLevel, attackPower);
-                    CharacterManagementSystemApplication.heroes.add(mage);
+                    game.addHero(mage);
                     break;
             }
         }
@@ -206,11 +207,6 @@ public class CreateHeroController implements Initializable
         setupTextField(defenceLevelTxt);
         setupTextField(attackPowerTxt);
     }
-
-
-
-
-
 }
 
 

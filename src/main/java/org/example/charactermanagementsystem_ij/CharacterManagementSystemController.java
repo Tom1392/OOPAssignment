@@ -2,6 +2,7 @@ package org.example.charactermanagementsystem_ij;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,11 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.scene.Scene;
 
 public class CharacterManagementSystemController implements Initializable
 {
@@ -60,7 +58,9 @@ public class CharacterManagementSystemController implements Initializable
 
     @FXML
     private void getReadyForBattle(ActionEvent event) throws IOException {
-        if(CharacterManagementSystemApplication.heroes.size()==1)
+        GameManager game = GameManager.getInstance();
+        ObservableList<Hero> heroes = game.getHeroes();
+        if(heroes.size()==1)
         {
             noOpponentAlert();
             return;
@@ -69,12 +69,10 @@ public class CharacterManagementSystemController implements Initializable
         {
             int oppSelector;
             do {
-                oppSelector=(int)(Math.random()*CharacterManagementSystemApplication.heroes.size());
-                System.out.println("Do LOOP");
+                oppSelector=(int)(Math.random()* heroes.size());
             }
-            while(CharacterManagementSystemApplication.heroes.get(oppSelector).equals(currentHero));
-            Hero opponent=CharacterManagementSystemApplication.heroes.get(oppSelector);
-            System.out.println("get ready for battle()");
+            while(heroes.get(oppSelector).equals(currentHero));
+            Hero opponent= heroes.get(oppSelector);
             goToBattle(currentHero,opponent, event);
         }
     }
@@ -82,7 +80,7 @@ public class CharacterManagementSystemController implements Initializable
     @FXML
     private void goToBattle(Hero player, Hero opponent, ActionEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(CharacterManagementSystemApplication.class.getResource("/org/example/charactermanagementsystem_ij/BattleArena.fxml"));
+        FXMLLoader loader = new FXMLLoader(GameManager.class.getResource("/org/example/charactermanagementsystem_ij/BattleArena.fxml"));
         Parent root = loader.load();
         BattleArenaController controller =loader.getController();
         controller.setPlayersInfo(player,opponent);
